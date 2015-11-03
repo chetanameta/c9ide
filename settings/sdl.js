@@ -44,6 +44,7 @@ module.exports = function (manifest, installPath) {
      */
 
     var workspaceDir = path.resolve(__dirname + "/../");
+
     //console.log(workspaceDir);
     var sdk = !manifest.sdk;
     var win32 = process.platform == "win32";
@@ -66,6 +67,8 @@ module.exports = function (manifest, installPath) {
 
     var config = {
         local: false,
+        appHostname:'localhost/workspace',
+        //hostname:'localhost/workspace',
         domains: 'local.c9ide.com',
         standalone: true,
         startBridge: true,
@@ -95,17 +98,17 @@ module.exports = function (manifest, installPath) {
         staticPrefix: "/static",
         projectUrl: "/workspace",
         ideBaseUrl: "http://local.c9ide.com",
-        previewUrl: "http://local.c9ide.com/",
+        previewUrl: "/workspace",
         dashboardUrl: "http://local.c9ide.com/dashboard.html",
         apiUrl: "https://api.c9.dev",
-        homeUrl: "/home",
+        homeUrl: "/workspace",
         collab: false,
         installed: true,
         packed: false,
         packedThemes: true,
         readonly: false,
         role: "a",
-        isAdmin: true,
+        isAdmin: false,
         runners: runners,
         builders: builders,
         //"plugins/c9.ide.run/gui": {
@@ -113,8 +116,16 @@ module.exports = function (manifest, installPath) {
         //    defaultConfigs: {enable:false}
         //},
         themePrefix: "/static/standalone/skin",
-        c9:{
-          hostname:'local.c9ide.com'
+        c9 : {
+            startdate: new Date(),
+            debug: true,
+            hosted: false,
+            local: true,
+            home: process.env.HOME,
+            setStatus: function(){},
+            location: "",
+            platform: process.platform,
+            hostname:'localhost'
         },
         cdn: {
             version: "standalone",
@@ -149,8 +160,8 @@ module.exports = function (manifest, installPath) {
             pubkey: null
         },
         project: {
-            id: 2,
-            name: "projectname",
+            id: 1,
+            name: "myproject",
             contents: null,
             descr: "descr"
         },
