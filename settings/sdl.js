@@ -9,7 +9,9 @@ module.exports = function (manifest, installPath) {
 
     var path = require("path");
     var os = require("os");
+    var http = require("http");
     var runners = require("../plugins/c9.ide.run/runners_list").local;
+    //console.log(http.get('request'));
     /**
      * delete unwanted runners
      */
@@ -67,7 +69,7 @@ module.exports = function (manifest, installPath) {
 
     var config = {
         local: false,
-        appHostname:'localhost/workspace',
+        appHostname:'/workspace',
         //hostname:'localhost/workspace',
         domains: 'local.c9ide.com',
         standalone: true,
@@ -100,8 +102,9 @@ module.exports = function (manifest, installPath) {
         ideBaseUrl: "http://local.c9ide.com",
         previewUrl: "/workspace",
         dashboardUrl: "http://local.c9ide.com/dashboard.html",
-        apiUrl: "https://api.c9.dev",
-        homeUrl: "/workspace",
+        //apiUrl: "https://api.c9.dev",
+        apiUrl: "http://local.c9ide.com",
+        //homeUrl: "/workspace",
         collab: false,
         installed: true,
         packed: false,

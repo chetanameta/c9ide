@@ -88,7 +88,19 @@ function plugin(options, imports, register) {
             w: {
                 source: "query",
                 optional: true
-            }, 
+            },
+            workspaceDir: {
+                source: "query",
+                optional: true
+            },
+            appHostname: {
+                source: "query",
+                optional: true
+            },
+            hostname: {
+                source: "query",
+                optional: true
+            },
         }
     }, function(req, res, next) {
 
@@ -99,17 +111,42 @@ function plugin(options, imports, register) {
         opts.options.collab = collab;
         if (req.params.packed == 1)
             opts.packed = opts.options.packed = true;
-        
+
         var cdn = options.options.cdn;
         options.options.themePrefix = "/static/" + cdn.version + "/skin/" + configName;
         options.options.workerPrefix = "/static/" + cdn.version + "/worker";
         options.options.CORSWorkerPrefix = opts.packed ? "/static/" + cdn.version + "/worker" : "";
-        
+        //console.log(req.headers['x-forwarded-host']);
+        if(req.headers['x-forwarded-host'] != undefined )
+        var hst = req.headers['x-forwarded-host'].split('.')[0];
+        else
+        var hst = 'test';
+
+        //var hst = 'test';
+        options.workspaceDir = '/var/www/html/workspaces/'+hst;
+        options.options.workspaceDir = '/var/www/html/workspaces/'+hst;
+        options.w = '/var/www/html/workspaces/'+hst;
+        options.options.w = '/var/www/html/workspaces/'+hst;
+
+        //options.home = '/var/www/html/workspaces/home/'+hst;
+        //options.options.home = '/var/www/html/workspaces/home/'+hst;
+
+        //options.appHostname = 'localhost/workspaces/'+hst;
+        options.options.appHostname = 'localhost/workspaces/'+hst;
+        //options.hostname = 'localhost/workspaces/'+hst;
+        //options.options.hostname = 'localhost/workspaces/'+hst;
+        //console.log(options.options.workspaceDir+' - '+options.workspaceDir);
         api.updatConfig(opts.options, {
-            w: req.params.w,
+            //w: req.params.w,
+            //appHostname: 'localhost/workspaces',
+            //hostname: 'localhost/workspaces',
+            w: '/var/www/html/workspaces/'+hst,
+            workspaceDir: '/var/www/html/workspaces/'+hst,
+            //w: '/var/www/html/testsite',
             token: req.params.token
         });
-        
+        //console.log(req.params);
+
         opts.options.debug = req.params.debug !== undefined;
         res.setHeader("Cache-Control", "no-cache, no-store");
         res.render(__dirname + "/views/standalone.html.ejs", {
@@ -210,7 +247,7 @@ function plugin(options, imports, register) {
         });
     });
     
-    api.get("/api.json", {name: "api"}, frontdoor.middleware.describeApi(api));
+        api.get("/api.json", {name: "api"}, frontdoor.middleware.describeApi(api));
 
     // fake authentication
     api.authenticate = api.authenticate || function() {
