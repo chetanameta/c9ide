@@ -172,3 +172,6 @@ function start(configName, options, callback) {
         });
     });
 }
+
+//process.setgid('www-data');
+//process.setuid('www-data');

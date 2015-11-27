@@ -73,7 +73,7 @@ module.exports = function (manifest, installPath) {
         //hostname:'localhost/workspace',
         domains: 'local.c9ide.com',
         standalone: true,
-        startBridge: true,
+        startBridge: false,
         manifest: manifest,
         workspaceDir: workspaceDir,
         projectName: path.basename(workspaceDir),
@@ -156,16 +156,16 @@ module.exports = function (manifest, installPath) {
             userSnapApiKey: "e3d3b232-1c21-4961-b73d-fbc8dc7be1c3"
         },
         user: {
-            id: -1,
-            name: "johndoe",
-            fullname: "John Doe",
-            email: "johndoe@example.org",
+            id: 15,
+            name: "chetan",
+            fullname: "Chetan Ameta",
+            email: "chetanameta@gmail.com",
             pubkey: null
         },
         project: {
-            id: 1,
+            id: 15,
             name: "myproject",
-            contents: null,
+            contents: "test contents",
             descr: "descr"
         },
         analytics: {

@@ -112,7 +112,7 @@ define(function(require, exports, module) {
 
                 vfsEndpoint.isOnline(function(err, isOnline) {
                     if (err || !isOnline) return callback(null, false);
-                    
+
                     if (!eioOptions) return disconnect();
                     if (!pingUrl) return disconnect();
                     

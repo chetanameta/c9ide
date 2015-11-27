@@ -326,13 +326,13 @@ function plugin(options, imports, register) {
 
         if (new Date(user.lastVfsAccess).getDate() != new Date().getDate() || 
             Date.now() > user.lastVfsAccess + VFS_ACTIVITY_WINDOW) {
-                
+
             analytics.superagent && analytics.superagent
                 .post(options.apiBaseUrl + "/metric/usage/" + req.params.pid + "?access_token=" + req.query.access_token)
                 .end(function() {});
                 
             user.lastVfsAccess = Date.now();
-            user.save(function() {});
+            //user.save(function() {});
         }
     }
 

@@ -37,7 +37,7 @@ module.exports = function(options) {
     var localExtendFiles = options.localExtend || options.standalone;
     // allow extend code access only to C9-deveoped plugins
     var extendToken = options.extendToken || "token";
-    
+
     var plugins = [
         // C9
         {
@@ -270,7 +270,7 @@ module.exports = function(options) {
         },
         {
             packagePath: "plugins/c9.ide.dialog.login/login",
-            noLogout: !options.local
+            noLogout: false
         },
         "plugins/c9.ide.dialog.file/file",
         "plugins/c9.ide.dialog.wizard/wizard",

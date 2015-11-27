@@ -71,7 +71,7 @@ define(function(require, exports, module) {
                 else
                     loggingIn();
             }
-            
+
             emit("loggingin");
             
             loggingIn = _login(function(err, token) {
